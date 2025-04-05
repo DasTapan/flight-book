@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: 2025-04-04 20:50:25
+  duration: 1
+
+two:
+  start: 2025-04-04 20:50:25
+  duration: 1
