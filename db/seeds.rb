@@ -29,7 +29,7 @@ AIRPORTS.each do |item|
     AIRPORTS.each do |i|
         next if item[:code] == i[:code]
         Flight.find_or_create_by!({
-            departure_airport_id: Airport.find_by(code: item[:code]).id, arrival_airport_id: Airport.find_by(code: i[:code]).id, start: DateTime.now + rand(1..54).hours, duration: (rand(45..90)) * 60
+            departure_airport_id: Airport.find_by(code: item[:code]).id, arrival_airport_id: Airport.find_by(code: i[:code]).id, start: DateTime.now + rand(1..245).hours, duration: (rand(45..90)) * 60
         })
     end
 end
