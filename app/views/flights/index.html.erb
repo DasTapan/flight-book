@@ -1,21 +1,46 @@
 <h1>Flights#index</h1>
 <p>Find me in app/views/flights/index.html.erb</p>
 
-<%= form_with url: "/", method: :get do |form| %>
+<%= form_with url: "/flights", method: :get do |form| %>
 
     <%= form.label :departure_airport ,"From" %>
-    <%= select_tag(:departure_airport, options_for_select(@airport_options)) %>
+    <%= select_tag(:departure_airport, options_for_select(@airport_options,params[:departure_airport])) %>
 
     <%= form.label :arrival_airport, "To" %>
-    <%= select_tag(:arrival_airport, options_for_select(@airport_options)) %>
+    <%= select_tag(:arrival_airport, options_for_select(@airport_options,params[:arrival_airport])) %>
 
     <%= form.label :passenger_count, "No of Passengers" %>
-    <%= select_tag(:passenger_count, options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])) %>
+    <%= select_tag(:passenger_count, options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]],params[:passenger_count])) %>
 
     <%= form.label :start, "Start" %>
-    <%= select_tag(:start, options_for_select(@flight_dates))%>
+    <%= select_tag(:start, options_for_select(@flight_dates,params[:start]))%>
 
     <div>
         <%= form.submit "Find Flights" %>
     </div>
 <% end %>
+
+<div>
+    <%= link_to 'Clear', root_path %>
+</div>
+
+<% unless @flights.empty?%>
+    <ul>
+        <% @flights.each do |flight|%>
+            <li>
+                <span>From: </span>
+                <span><%= flight.departure_airport.city %></span>
+                <span>To: </span>
+                <span><%= flight.arrival_airport.city %></span>
+                <span>Duration: </span>
+                <span><%= flight.duration/60 %></span>
+                <span>On: </span>
+                <span><%= flight.start.strftime("%d-%m-%y") %></span>
+                <span><%= flight.start.strftime("%H:%M")%></span>
+            </li>        
+        <% end %>
+    </ul>
+<% end %>
+<div>
+    
+</div>
