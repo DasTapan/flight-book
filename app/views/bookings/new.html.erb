@@ -1,0 +1,30 @@
+<%= form_with model: @booking do |form| %>
+    <div>
+        <span>FROM: </span> <span><%= @departure_airport[:city] %>     </span>
+        <span>TO: </span> <span><%= @arrival_airport[:city] %>         </span>
+        <span>Flight #<%= @flight_id %>    </span>
+        <span><%= @start.strftime("%d-%m-%y %H:%M %p") %></span>
+
+        <%= hidden_field_tag "booking[flight_id]", @flight_id %>
+
+        <%= form.fields_for :passengers do |passenger_form| %>    
+            <div>
+                <%= passenger_form.label :email, "Email" %>
+                <%= passenger_form.text_field :email %>
+            </div>
+
+            <div>
+                <%= passenger_form.label :mobile, "Mobile" %>
+                <%= passenger_form.text_field :mobile %>
+            </div>
+
+            <div>
+                <%= passenger_form.label :name, "Name" %>
+                <%= passenger_form.text_field :name %>
+            </div>
+        <% end %>
+
+    </div>
+
+    <%= form.submit "Book Ticket" %>
+<% end %>

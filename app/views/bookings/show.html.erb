@@ -1,0 +1,20 @@
+<p>this is booking show page</p>
+
+<div>
+        <span>FROM: </span> <span><%= @flight.departure_airport[:city] %>     </span>
+        <span>TO: </span> <span><%= @flight.arrival_airport[:city] %>         </span>
+        <span>Flight #<%= @flight.id %>    </span>
+        <span><%= @flight.start.strftime("%d-%m-%y %H:%M %p") %></span>
+</div>
+
+<h2>Passengers</h2>
+
+<ul>
+    <% @passengers.each do |p| %>
+        <li>
+            <span><%= p.name  %></span>
+            <span><%= p.email %></span>
+            <span><%= p.mobile %></span>
+        </li>
+    <% end %>
+</ul>

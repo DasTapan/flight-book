@@ -24,23 +24,29 @@
     <%= link_to 'Clear', root_path %>
 </div>
 
-<% unless @flights.empty?%>
-    <ul>
+<% unless @flights.empty? %>
+    <%= form_with url: "/bookings/new", method: :get do |f|%>
+        <%= hidden_field_tag "booking[tickets]", params[:passenger_count] %>
         <% @flights.each do |flight|%>
-            <li>
-                <span>From: </span>
-                <span><%= flight.departure_airport.city %></span>
-                <span>To: </span>
-                <span><%= flight.arrival_airport.city %></span>
-                <span>Duration: </span>
-                <span><%= flight.duration/60 %></span>
-                <span>On: </span>
-                <span><%= flight.start.strftime("%d-%m-%y") %></span>
-                <span><%= flight.start.strftime("%H:%M")%></span>
-            </li>        
+            <div>
+                <%= f.radio_button "booking[flight]", flight.id  %>
+                <%= f.label "booking[flight]_#{flight.id}" do %>
+                    <span>From: </span>
+                    <span><%= flight.departure_airport.city %></span>
+                    <span>To: </span>
+                    <span><%= flight.arrival_airport.city %></span>
+                    <span>Duration: </span>
+                    <span><%= flight.duration/60 %> min</span>
+                    <span>On: </span>
+                    <span><%= flight.start.strftime("%d-%m-%y") %></span>
+                    <span><%= flight.start.strftime("%H:%M %p")%></span>
+                <% end %>
+            </div>
         <% end %>
-    </ul>
+
+        <div>
+            <%= f.submit "Book" %>
+        </div>
+
+    <% end %>
 <% end %>
-<div>
-    
-</div>
